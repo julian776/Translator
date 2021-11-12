@@ -1,7 +1,6 @@
 package app;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.HashMap;
 
 
@@ -30,8 +29,11 @@ public class DataManager {
         return words;
     }
 
-    public void updateDbase(HashMap words_dbase){
-        
-
+    public void updateDbase(HashMap words_dbase) throws IOException {
+        FileWriter writer = new FileWriter("data.txt");
+        BufferedWriter buffer = new BufferedWriter(writer);
+        PrintWriter wr = new PrintWriter(buffer);
+        words_dbase.forEach((k, v) -> wr.println(String.join("/", String.valueOf(k), String.valueOf(v))));
+        wr.flush();
     }
 }
